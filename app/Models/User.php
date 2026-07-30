@@ -12,6 +12,7 @@ use Illuminate\Notifications\Notifiable;
 
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]
+
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
@@ -22,6 +23,8 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    
+   
     protected function casts(): array
     {
         return [
@@ -29,4 +32,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function commandes()
+{
+    return $this->hasMany(Commande::class);
+}
 }
