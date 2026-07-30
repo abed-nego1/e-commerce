@@ -19,7 +19,4 @@ class Commande extends Model
     {
         return $this->belongsToMany(Produit::class, 'commande_produits');
     }
-
-
-
 }
