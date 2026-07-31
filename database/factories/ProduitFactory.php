@@ -27,7 +27,7 @@ class ProduitFactory extends Factory
             'prix' => fake()->randomFloat(2, 1, 100),
             'stock' => fake()->numberBetween(0, 100),
             'actif' => fake()->boolean(),
-            'image' => fake()->imageUrl(),
+            'image' => 'https://picsum.photos/seed/' . fake()->uuid() . '/600/400',
             'categorie_id' => Categorie::factory(),
         ];
     }

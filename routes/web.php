@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProduitController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,3 +19,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+Route::get('/produits', [ProduitController::class, 'index'])->name('produits.index');
+Route::get('/produits/{produit}', [ProduitController::class, 'show'])->name('produits.show');
