@@ -74,4 +74,58 @@
         </div>
     </div>
 
+    {{-- ================= APERÇU PRODUITS ================= --}}
+    <div class="admin-card" style="margin-top: 1.5rem;">
+        <div class="admin-card__header">
+            <h2 class="admin-card__title">Aperçu du catalogue produits</h2>
+            <a href="{{ route('admin.products.index') }}" class="admin-btn admin-btn--ghost admin-btn--sm">Gérer tous les produits</a>
+        </div>
+        <div class="admin-card__body admin-table-wrap">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th class="admin-table__num">Stock</th>
+                        <th>Statut</th>
+                        <th style="text-align: right;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse (($recentProducts ?? []) as $produit)
+                        <tr>
+                            <td>
+                                @if ($produit->image)
+                                    <img src="{{ asset('storage/' . $produit->image) }}" alt="{{ $produit->nom }}" style="width: 35px; height: 35px; object-fit: cover; border-radius: 4px;">
+                                @else
+                                    <span class="admin-text-muted" style="font-size: 0.75rem;">Sans img</span>
+                                @endif
+                            </td>
+                            <td class="admin-table__cell-strong">{{ $produit->nom }}</td>
+                            <td class="admin-mono">{{ number_format($produit->prix, 0, ',', ' ') }} F</td>
+                            <td class="admin-table__num admin-mono">{{ $produit->stock }}</td>
+                            <td>
+                                @if ($produit->actif)
+                                    <span class="admin-badge admin-badge--validated">Actif</span>
+                                @else
+                                    <span class="admin-badge admin-badge--rejected">Inactif</span>
+                                @endif
+                            </td>
+                            <td style="text-align: right;">
+                                <a href="{{ route('admin.products.edit', $produit->id) }}" class="admin-btn admin-btn--ghost admin-btn--sm">Éditer</a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6">
+                                <div class="admin-empty">Aucun produit disponible.</div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 @endsection

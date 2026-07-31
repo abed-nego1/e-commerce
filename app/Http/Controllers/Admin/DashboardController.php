@@ -26,12 +26,18 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
 
+        // Récupération des 5 derniers produits pour l'aperçu du dashboard
+        $recentProducts = Produit::latest()
+            ->take(5)
+            ->get();
+
         return view('admin.dashboard', compact(
             'pendingOrdersCount',
             'revenue30Days',
             'customersCount',
             'activeProductsCount',
-            'recentOrders'
+            'recentOrders',
+            'recentProducts'
         ));
     }
 }

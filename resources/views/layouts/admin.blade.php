@@ -32,6 +32,14 @@
                         <span class="admin-nav__icon">&#9632;</span> Tableau de bord
                     </a>
                 </li>
+
+                <li class="admin-nav__item">
+                    <a href="{{ route('admin.products.index') }}"
+                        class="admin-nav__link {{ request()->routeIs('admin.products.*') ? 'admin-nav__link--active' : '' }}">
+                        <span class="admin-nav__icon">&#128230;</span> Produits
+                    </a>
+                </li>
+                
                 <li class="admin-nav__item">
                     <a href="{{ route('admin.commandes.index') }}"
                         class="admin-nav__link {{ request()->routeIs('admin.commandes.*') ? 'admin-nav__link--active' : '' }}">
