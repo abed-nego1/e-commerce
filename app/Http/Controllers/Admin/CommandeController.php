@@ -27,7 +27,7 @@ class CommandeController extends Controller
 
     public function show(Commande $commande)
     {
-        $commande->load('user', 'lignesCommande.produit');
+        $commande->load('user', 'produits');
 
         return view('admin.commandes.show', compact('commande'));
     }
