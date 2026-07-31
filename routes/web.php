@@ -5,6 +5,7 @@ use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CommandeController;
 use Illuminate\Support\Facades\Route;
+require __DIR__.'/auth.php';
 
 
 Route::get('/', function () {
@@ -38,6 +39,8 @@ Route::get('/', function () {
     return view('home', compact('products'));
 });
 
+
+
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{produit}', [CartController::class, 'add'])->name('cart.add');
 Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
@@ -54,10 +57,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/my-orders', [CommandeController::class, 'index'])
-        ->name('commandes.index');
+    ->name('commandes.index');
 
-    Route::get('/my-orders/{commande}', [CommandeController::class, 'show'])
-        ->name('commandes.show');
+Route::get('/my-orders/{commande}', [CommandeController::class, 'show'])
+    ->name('commandes.show');
 });
 
 Route::get('/produits', [ProduitController::class, 'index'])->name('produits.index');

@@ -29,6 +29,15 @@
             @if ($produit->description)
                 <p class="text-gray-600 mt-6 leading-relaxed">{{ $produit->description }}</p>
             @endif
+            <div class="px-4 pb-4 mt-auto pt-2">
+                <form action="{{ route('cart.add', $produit) }}" method="POST">
+                    @csrf
+                    <button type="submit"
+                        class="w-full bg-black text-white text-sm py-2 rounded-md hover:bg-gray-800 transition">
+                        Commander
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

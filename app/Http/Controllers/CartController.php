@@ -93,6 +93,6 @@ class CartController extends Controller
             return redirect()->route('login')->with('info', 'Connectez-vous pour valider votre commande');
         }
 
-        return redirect()->route('cart.index')->with('success', 'Commande en cours...');
+        return redirect()->route('commandes.index')->with('success', 'Commande en cours...');
     }
 }

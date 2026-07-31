@@ -3,21 +3,21 @@
         <a href="{{ url('/') }}" class="logo">GlowShop</a>
 
         <div class="nav-right">
-            <a href="{{ url('/products') }}" class="nav-link">Products</a>
+            <a href="{{ url('/produits') }}" class="nav-link">Products</a>
 
             @auth
-                <a href="{{ url('/orders') }}" class="nav-link">My Orders</a>
+                <a href="{{ url('/my-orders') }}" class="nav-link">My Orders</a>
             @endauth
 
             <a href="{{ url('/cart') }}" class="cart-link">
                 <i class="fa-solid fa-bag-shopping"></i>
-                <span class="cart-badge">
+                {{-- <span class="cart-badge">
                     @if (Auth::check())
                         {{ \App\Models\CartItem::where('user_id', Auth::id())->sum('quantity') }}
                     @else
                         {{ \App\Models\CartItem::where('session_id', session()->getId())->sum('quantity') }}
                     @endif
-                </span>
+                </span> --}}
             </a>
 
             @guest

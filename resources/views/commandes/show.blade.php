@@ -173,7 +173,7 @@
             </aside>
         </div>
     </div>
-@endsection@extends('layouts.app')
+@endsection
 
 @section('title', 'Détail de la commande')
 

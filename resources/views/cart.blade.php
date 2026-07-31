@@ -23,7 +23,7 @@
             <i class="fa-solid fa-bag-shopping"></i>
             <h2>Votre panier est vide</h2>
             <p>Découvrez nos produits et ajoutez vos coups de cœur.</p>
-            <a href="{{ url('/') }}" class="btn-primary">Voir les produits</a>
+            <a href="{{ url('/produits') }}" class="btn-primary">Voir les produits</a>
         </div>
     @else
         <div class="cart-container">
