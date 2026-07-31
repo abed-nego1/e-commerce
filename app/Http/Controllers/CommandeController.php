@@ -3,63 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commande;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommandeController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
     {
-        //
+        /**
+         * Page My Orders : liste des commandes du client connecté.
+         */
+        public function index()
+    {
+        $commandes = Commande::with('produits')
+            ->withCount('produits')
+            ->latest()
+            ->paginate(10);
+
+        return view('commandes.index', compact('commandes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+        /**
+         * Page Order Detail : détail d'une commande.
+         */
+        public function show(Commande $commande)
     {
-        //
-    }
+        $commande->load([
+            'produits',
+            'user',
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Commande $commande)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Commande $commande)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Commande $commande)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Commande $commande)
-    {
-        //
+        return view('commandes.show', compact('commande'));
     }
 }
+
