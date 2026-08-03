@@ -16,6 +16,10 @@ class Commande extends Model
         'adresse_livraison',
     ];
 
+    protected $casts = [
+        'adresse_livraison' => 'array',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

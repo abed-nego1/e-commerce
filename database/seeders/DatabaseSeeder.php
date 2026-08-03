@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
@@ -18,7 +19,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();   
+        User::factory(10)->create();
+
+        User::firstOrCreate(
+    ['email' => 'admin@shop.com'], // Condition de recherche
+    [
+        'name'     => 'Admin',
+        'password' => 'password123',
+        'is_admin'     => true,
+    ]
+);
+        User::factory(5)->create();
         Categorie::factory(3)->create();
         $produits = Produit::factory(20)->create();
         Commande::factory(10)->create()->each(
