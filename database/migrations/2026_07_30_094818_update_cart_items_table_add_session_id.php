@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::table('cart_items', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropUnique(['user_id', 'product_id']);
+            $table->dropUnique(['user_id', 'produit_id']);
             $table->dropColumn('user_id');
-            $table->dropForeign(['product_id']);
-            $table->dropColumn('product_id');
+            $table->dropForeign(['produit_id']);
+            $table->dropColumn('produit_id');
         });
 
         Schema::table('cart_items', function (Blueprint $table) {

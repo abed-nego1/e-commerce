@@ -3,6 +3,7 @@
         <a href="{{ url('/') }}" class="logo">GlowShop</a>
 
         <div class="nav-right">
+            <a href="{{ url('/dashboard') }}" class="nav-link">Profils</a>
             <a href="{{ url('/produits') }}" class="nav-link">Products</a>
 
             @auth

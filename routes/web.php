@@ -9,36 +9,7 @@ require __DIR__.'/auth.php';
 
 require __DIR__ . '/admin.php';
 
-Route::get('/', function () {
-    $products = [
-        [
-            'name' => 'Sérum Hydratant',
-            'description' => 'Peau douce et lumineuse toute la journée.',
-            'price' => 29.99,
-            'image' => 'images/products/serum.jpg',
-        ],
-        [
-            'name' => 'Rouge à Lèvres Velvet',
-            'description' => 'Couleur intense avec une tenue longue durée.',
-            'price' => 18.50,
-            'image' => 'images/products/rouge-levres.jpg',
-        ],
-        [
-            'name' => 'Crème Éclat Visage',
-            'description' => 'Une texture légère pour illuminer le teint.',
-            'price' => 24.90,
-            'image' => 'images/products/creme-visage.jpg',
-        ],
-        [
-            'name' => 'Gel Nettoyant Doux',
-            'description' => 'Purifie la peau sans agression.',
-            'price' => 16.00,
-            'image' => 'images/products/gel-nettoyant.jpg',
-        ],
-    ];
 
-    return view('home', compact('products'));
-});
 
 
 
@@ -50,7 +21,7 @@ Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('components.welcome-user');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

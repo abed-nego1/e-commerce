@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('title', 'Mon Panier - GlowShop')
+
+@section('content')
 <section class="welcome-user">
     <div class="welcome-content">
         <span class="welcome-tag">Bon retour parmi nous</span>
@@ -5,8 +10,8 @@
         <p>Découvrez nos nouveautés et vos coups de cœur du moment.</p>
 
         <div class="welcome-actions">
-            <a href="{{ url('/products') }}" class="btn-primary">Voir tous les produits</a>
-            <a href="{{ url('/cart') }}" class="btn-secondary">Mon panier</a>
+            <a href="{{ route('produits.index') }}" class="btn-primary">Voir tous les produits</a>
+            <a href="{{ route('cart.index') }}" class="btn-secondary">Mon panier</a>
         </div>
     </div>
 
@@ -28,3 +33,4 @@
         </div>
     </div>
 </section>
+@endsection

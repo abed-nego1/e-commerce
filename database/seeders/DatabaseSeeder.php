@@ -22,8 +22,8 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         User::firstOrCreate(
-    ['email' => 'admin@shop.com'], // Condition de recherche
-    [
+    ['email' => 'admin@shop.com', // Condition de recherche
+
         'name'     => 'Admin',
         'password' => 'password123',
         'is_admin'     => true,

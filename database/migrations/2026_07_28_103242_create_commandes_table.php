@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->decimal('total', 20, 2);
             $table->string('statut')->default('en_attente');
-            $table->string('adresse_livraison');
+            $table->json('adresse_livraison')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

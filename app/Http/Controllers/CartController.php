@@ -6,6 +6,8 @@ use App\Models\CartItem;
 use App\Models\Produit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Commande;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -87,12 +89,47 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Panier vidé');
     }
 
-    public function checkout()
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('info', 'Connectez-vous pour valider votre commande');
+
+
+public function checkout()
+{
+    if (!Auth::check()) {
+        return redirect()->route('login')
+            ->with('info', 'Connectez-vous pour valider votre commande');
+    }
+
+    $cartItems = CartItem::where('user_id', Auth::id())
+        ->with('produit')
+        ->get();
+
+    if ($cartItems->isEmpty()) {
+        return redirect()->route('cart.index')
+            ->with('error', 'Votre panier est vide.');
+    }
+
+    DB::transaction(function () use ($cartItems) {
+
+        $total = $cartItems->sum(function ($item) {
+            return $item->produit->prix * $item->quantity;
+        });
+
+        $commande = Commande::create([
+            'user_id' => Auth::id(),
+            'total' => $total,
+            'statut' => 'en_attente',
+        ]);
+
+        foreach ($cartItems as $item) {
+            $commande->produits()->attach($item->produit_id, [
+                'quantite' => $item->quantity,
+                'prix_unitaire' => $item->produit->prix,
+            ]);
         }
 
-        return redirect()->route('commandes.index')->with('success', 'Commande en cours...');
-    }
+        CartItem::where('user_id', Auth::id())->delete();
+    });
+
+    return redirect()->route('commandes.index')
+        ->with('success', 'Commande passée avec succès.');
+}
 }
