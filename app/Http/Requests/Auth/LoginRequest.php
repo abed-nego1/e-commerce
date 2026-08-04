@@ -42,7 +42,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -50,9 +50,16 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        if (Auth::user()->is_admin) {
+            Auth::logout();
+
+            throw ValidationException::withMessages([
+                'email' => "Ce compte est un compte administrateur. Créez un compte client pour passer une commande.",
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
-
     /**
      * Ensure the login request is not rate limited.
      *

@@ -9,7 +9,7 @@ require __DIR__.'/auth.php';
 
 require __DIR__ . '/admin.php';
 
-
+Route::get('/', [ProduitController::class, 'index'])->name('home');
 
 
 
@@ -18,7 +18,8 @@ Route::post('/cart/add/{produit}', [CartController::class, 'add'])->name('cart.a
 Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::get('/cart/checkout', [CartController::class, 'showCheckout'])->name('cart.checkout');
+Route::post('/cart/checkout', [CartController::class, 'processCheckout'])->name('cart.checkout.process');
 
 Route::get('/dashboard', function () {
     return view('components.welcome-user');

@@ -39,7 +39,7 @@
                         <span class="admin-nav__icon">&#128230;</span> Produits
                     </a>
                 </li>
-                
+
                 <li class="admin-nav__item">
                     <a href="{{ route('admin.commandes.index') }}"
                         class="admin-nav__link {{ request()->routeIs('admin.commandes.*') ? 'admin-nav__link--active' : '' }}">
@@ -80,9 +80,8 @@
                 </div>
                 <div class="admin-topbar__right">
                     <div class="admin-topbar__user">
-                        <span
-                            class="admin-topbar__avatar">{{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}</span>
-                        <span>{{ auth()->user()->name ?? 'Admin' }}</span>
+                        <span class="admin-topbar__avatar">{{ strtoupper(substr(Auth::guard('admin')->user()->name ?? 'A', 0, 1)) }}</span>
+                        <span>{{ Auth::guard('admin')->user()->name ?? 'Admin' }}</span>
                     </div>
                 </div>
             </header>

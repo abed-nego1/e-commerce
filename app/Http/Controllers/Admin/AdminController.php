@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     public function destroy(User $admin)
     {
-        if ($admin->id === auth()->id()) {
+        if ($admin->id === auth('admin')->id()) {
             return back()->with('error', 'Vous ne pouvez pas supprimer votre propre compte.');
         }
 

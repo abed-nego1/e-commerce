@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -8,12 +7,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class EnsureUserIsAdmin
 {
-    public function handle(Request $request, Closure $next): Response
-    {
-        if (!$request->user() || !$request->user()->is_admin) {
-            abort(403, 'Accès réservé aux administrateurs.');
-        }
+public function handle(Request $request, Closure $next): Response
+{
+if (! $request->user('admin') || ! $request->user('admin')->is_admin) {
+abort(403, 'Accès réservé aux administrateurs.');
+}
 
-        return $next($request);
-    }
+return $next($request);
+}
 }

@@ -20,14 +20,14 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (!Auth::attempt($credentials)) {
+        if (! Auth::guard('admin')->attempt($credentials)) {
             return back()
                 ->withErrors(['email' => 'Identifiants incorrects.'])
                 ->onlyInput('email');
         }
 
-        if (!Auth::user()->is_admin) {
-            Auth::logout();
+        if (! Auth::guard('admin')->user()->is_admin) {
+            Auth::guard('admin')->logout();
 
             return back()->withErrors(['email' => "Ce compte n'a pas accès au back-office."]);
         }
@@ -39,7 +39,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

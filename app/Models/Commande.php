@@ -9,12 +9,7 @@ class Commande extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'total',
-        'statut',
-        'adresse_livraison',
-    ];
+    protected $fillable = ['user_id', 'total', 'statut', 'adresse_livraison'];
 
     protected $casts = [
         'adresse_livraison' => 'array',
@@ -27,11 +22,8 @@ class Commande extends Model
 
     public function produits()
     {
-        return $this->belongsToMany(
-            Produit::class,
-            'commande_produits'
-        )
-        ->withPivot('quantite', 'prix_unitaire')
-        ->withTimestamps();
+        return $this->belongsToMany(Produit::class, 'commande_produits')
+            ->withPivot('quantite', 'prix_unitaire')
+            ->withTimestamps();
     }
 }
